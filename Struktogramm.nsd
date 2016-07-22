@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root text="&#34;A* ALGORITHMUS&#34;" comment="" color="ffffff" type="sub" style="nice">
+	<children>
+		<instruction text="&#34;Initaliesierung von&#34;,&#34;i, j, u, k, bestes_Kosten und bestes_nummer als Integer&#34;,&#34;offene_liste, abgearbeitete_Liste, hinderniss_Liste und buffer_Liste als Array von TFeldInfo;&#34;,&#34;aktueller_knoten, abgearbeiteter_knoten und neuer_knoten als TKnoten;&#34;,&#34;ziel_gefunden und schon_vorhanden als Boolean;&#34;,&#34;Anzahl_offen und Anzahl_abgearbeitet als Integer;&#34;,&#34;Buffer_schritte und Array als TSchritt&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+		<alternative text="&#34;(Start_x &#60; 0) OR (Start_y &#60; 0) &#34;" comment="" color="ffffff">
+			<qTrue>
+				<instruction text="&#34;Rückgabe von 4&#34;,&#34;Beenden&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+			</qTrue>
+			<qFalse>
+			</qFalse>
+		</alternative>
+		<alternative text="&#34;(START_X &#62;= Karte.read_grosse_x()) OR&#34;,&#34;(START_Y &#62;= Karte.read_grosse_y()) &#34;" comment="" color="ffffff">
+			<qTrue>
+				<instruction text="&#34;Rückgabe von 5&#34;,&#34;Beenden&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+			</qTrue>
+			<qFalse>
+			</qFalse>
+		</alternative>
+		<alternative text="&#34;(Ziel_X &#60; 0) OR (Ziel_Y &#60; 0)&#34;" comment="" color="ffffff">
+			<qTrue>
+				<instruction text="&#34;Rückgabe von 2&#34;,&#34;Beenden&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+			</qTrue>
+			<qFalse>
+			</qFalse>
+		</alternative>
+		<alternative text="&#34;(Ziel_x &#62;= Karte.read_grosse_x()) OR&#34;,&#34;(Ziel_y &#62;= Karte.read_grosse_y())&#34;" comment="" color="ffffff">
+			<qTrue>
+				<instruction text="&#34;Rückgabe von 3&#34;,&#34;Beenden&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+			</qTrue>
+			<qFalse>
+			</qFalse>
+		</alternative>
+		<instruction text="&#34;neuer_knoten.Pos_x := Start_x&#34;,&#34;neuer_knoten.Pos_y := Start_y&#34;,&#34;neuer_knoten.kosten_hierher := 0&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+		<call text="&#34;neuer_knoten.kosten_ziel := errechneter_weg(neuer_knoten.Pos_x, neuer_knoten.Pos_y)&#34;" comment="&#34;&#34;" color="ffffff"></call>
+		<instruction text="&#34;Anzahl_Offen := 1&#34;,&#34;Ändere Array Größe von Offene_Liste in 2&#34;,&#34;offene_liste[1] :=neuer_knoten&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+		<instruction text="&#34;Ziel_Gefunden := FALSE&#34;" comment="" color="ffffff" rotated="0"></instruction>
+		<repeat text="&#34;(anzahl_offen = 0) OR (Ziel_gefunden = True)&#34;" comment="" color="ffffff">
+			<qRepeat>
+				<instruction text="&#34;Aktueller_Knoten := Offene_Liste[1]&#34;,&#34;bestes_kosten := Aktueller_Knoten.kosten_gesamt&#34;,&#34;bestes_nummer := 1&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+				<for text="&#34;For i = 1 to anzahl_offen (1)&#34;" comment="" color="ffffff">
+					<qFor>
+						<instruction text="&#34;Aktueller_Knoten := offene_liste[i];&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+						<alternative text="&#34;Aktueller_Knoten.kosten_gesamt &#60; bestes_kosten&#34;" comment="&#34;&#34;" color="ffffff">
+							<qTrue>
+								<instruction text="&#34;bestes_kosten := aktueller_Knoten.kosten_gesamt;&#34;,&#34;bestes_nummer := i;&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+							</qTrue>
+							<qFalse>
+							</qFalse>
+						</alternative>
+					</qFor>
+				</for>
+				<instruction text="&#34;Aktueller_Knoten := offene_liste[bestes_nummer]&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+				<alternative text="&#34;Aktueller_Knoten.kosten_ziel = 0&#34;" comment="&#34;&#34;" color="ffffff">
+					<qTrue>
+						<instruction text="&#34;Ziel_gefunden := TRUE&#34;" comment="" color="ffffff" rotated="0"></instruction>
+						<instruction text="&#34;Beenden der Fußgesteuerten Schleife&#34;" comment="" color="ffffff" rotated="0"></instruction>
+					</qTrue>
+					<qFalse>
+					</qFalse>
+				</alternative>
+				<for text="&#34;For i = -1 to +1 (1)&#34;" comment="" color="ffffff">
+					<qFor>
+						<alternative text="&#34;(Aktueller_Knoten.Pos_x + i &#60; 1) OR&#34;,&#34;(Aktueller_Knoten.Pos_x + i &#62; Karte.read_grosse_x)&#34;" comment="&#34;&#34;" color="ffffff">
+							<qTrue>
+								<instruction text="&#34;Nächstes Element der Zähler Schleife&#34;" comment="" color="ffffff" rotated="0"></instruction>
+							</qTrue>
+							<qFalse>
+							</qFalse>
+						</alternative>
+						<for text="&#34;For j:= -1 to +1 (1)&#34;" comment="" color="ffffff">
+							<qFor>
+								<alternative text="&#34;(Aktueller_Knoten.Pos_y + j &#60; 1) OR&#34;,&#34;(Aktueller_Knoten.Pos_y + j &#62; Karte.read_grosse_y)&#34;" comment="&#34;&#34;" color="ffffff">
+									<qTrue>
+										<instruction text="&#34;Nächstes Element der Zähler Schleife&#34;" comment="" color="ffffff" rotated="0"></instruction>
+									</qTrue>
+									<qFalse>
+									</qFalse>
+								</alternative>
+								<alternative text="&#34;Karte.read_kosten_feld(Aktueller_Knoten.Pos_x + i, &#34;,&#34;   Aktueller_Knoten.Pos_y + j) = 0&#34;" comment="&#34;&#34;" color="ffffff">
+									<qTrue>
+										<instruction text="&#34;Nächstes Element der Zähler Schleife&#34;" comment="" color="ffffff" rotated="0"></instruction>
+									</qTrue>
+									<qFalse>
+									</qFalse>
+								</alternative>
+								<instruction text="&#34;schon_vorhanden := FALSE&#34;" comment="" color="ffffff" rotated="0"></instruction>
+								<for text="&#34;For u:=1 to anzahl_abgearbeitet&#34;" comment="" color="ffffff">
+									<qFor>
+										<instruction text="&#34;abgearbeiteter_Knoten := abgearbeitete_Liste[u]&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+										<alternative text="&#34;(abgearbeiteter_Knoten.Pos_x = Aktueller_Knoten.Pos_x + i) and &#34;,&#34;(abgearbeiteter_Knoten.Pos_y = Aktueller_Knoten.Pos_y + j)&#34;" comment="&#34;&#34;" color="ffffff">
+											<qTrue>
+												<alternative text="&#34;Betrag aus i + j = 1&#34;" comment="" color="ffffff">
+													<qTrue>
+														<instruction text="&#34;k := 2&#34;" comment="" color="ffffff" rotated="0"></instruction>
+													</qTrue>
+													<qFalse>
+														<instruction text="&#34;k := 3&#34;" comment="" color="ffffff" rotated="0"></instruction>
+													</qFalse>
+												</alternative>
+												<alternative text="&#34;(abgearbeiteter_Knoten.kosten_hierher &#62; Aktueller_Knoten.kosten_hierher +k)&#34;" comment="&#34;&#34;" color="ffffff">
+													<qTrue>
+														<instruction text="&#34;abgearbeitete_Liste[u].kosten_hierher := &#34;,&#34;Aktueller_Knoten.kosten_hierher +k&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+													</qTrue>
+													<qFalse>
+													</qFalse>
+												</alternative>
+												<instruction text="&#34;schon_Vorhanden := TRUE&#34;" comment="" color="ffffff" rotated="0"></instruction>
+												<instruction text="&#34;Beenden der Zähler Schleife (u)&#34;" comment="" color="ffffff" rotated="0"></instruction>
+											</qTrue>
+											<qFalse>
+											</qFalse>
+										</alternative>
+									</qFor>
+								</for>
+								<for text="&#34;For u:=1 to anzahl_offen&#34;" comment="" color="ffffff">
+									<qFor>
+										<instruction text="&#34;abgearbeiteter_Knoten := offene_Liste[u]&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+										<alternative text="&#34;(abgearbeiteter_Knoten.Pos_x = Aktueller_Knoten.Pos_x + i) and &#34;,&#34;(abgearbeiteter_Knoten.Pos_y = Aktueller_Knoten.Pos_y + j)&#34;" comment="&#34;&#34;" color="ffffff">
+											<qTrue>
+												<alternative text="&#34;Betrag aus i + j = 1&#34;" comment="" color="ffffff">
+													<qTrue>
+														<instruction text="&#34;k := 2&#34;" comment="" color="ffffff" rotated="0"></instruction>
+													</qTrue>
+													<qFalse>
+														<instruction text="&#34;k := 3&#34;" comment="" color="ffffff" rotated="0"></instruction>
+													</qFalse>
+												</alternative>
+												<alternative text="&#34;(abgearbeiteter_Knoten.kosten_hierher &#62; Aktueller_Knoten.kosten_hierher +k)&#34;" comment="&#34;&#34;" color="ffffff">
+													<qTrue>
+														<instruction text="&#34;abgearbeitete_Liste[u].kosten_hierher := &#34;,&#34;Aktueller_Knoten.kosten_hierher +k&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+													</qTrue>
+													<qFalse>
+													</qFalse>
+												</alternative>
+												<instruction text="&#34;schon_Vorhanden := TRUE&#34;" comment="" color="ffffff" rotated="0"></instruction>
+												<instruction text="&#34;Beenden der Zähler Schleife (u)&#34;" comment="" color="ffffff" rotated="0"></instruction>
+											</qTrue>
+											<qFalse>
+											</qFalse>
+										</alternative>
+									</qFor>
+								</for>
+								<alternative text="&#34;Schon_Vorhanden := TRUE&#34;" comment="" color="ffffff">
+									<qTrue>
+										<instruction text="&#34;nächstes Element der Zähler Schleife  (j)&#34;" comment="" color="ffffff" rotated="0"></instruction>
+									</qTrue>
+									<qFalse>
+									</qFalse>
+								</alternative>
+								<instruction text="&#34;neuer_knoten.Pos_x := Aktueller_Knoten.Pos_x + i;&#34;,&#34;neuer_knoten.Pos_y := Aktueller_Knoten.Pos_y + j;&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+								<alternative text="&#34;Betrag aus i + j = 1&#34;" comment="" color="ffffff">
+									<qTrue>
+										<instruction text="&#34;neuer_knoten.kosten_hierher := Aktueller_Knoten.kosten_hierher + 2&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+									</qTrue>
+									<qFalse>
+										<instruction text="&#34;neuer_knoten.kosten_hierher := Aktueller_Knoten.kosten_hierher + 3&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+									</qFalse>
+								</alternative>
+								<call text="&#34;neuer_knoten.kosten_ziel := errechneter_weg(neuer_knoten.Pos_x, neuer_knoten.Pos_y);&#34;" comment="&#34;&#34;" color="ffffff"></call>
+								<instruction text="&#34;neuer_knoten.kosten_gesamt := neuer_knoten.kosten_hierher + neuer_knoten.kosten_ziel;&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+								<instruction text="&#34;anzahl_offen um 1 erhöhen&#34;,&#34;Ändere Array Größe von Offene_Liste in anzahl_offen + 1&#34;" comment="" color="ffffff" rotated="0"></instruction>
+							</qFor>
+						</for>
+					</qFor>
+				</for>
+				<instruction text="&#34;anzahl_abgearbeitet um 1 erhöhen&#34;,&#34;Ändere Array Größe von abgearbeitete_Liste in anzahl_abgearbeitet + 1&#34;" comment="" color="ffffff" rotated="0"></instruction>
+				<instruction text="&#34;Abgearbeitet_Liste[anzahl_abgearbeitet] := Offene_liste[beste_nummer]&#34;" comment="" color="ffffff" rotated="0"></instruction>
+				<instruction text="&#34;Element Offene_Liste[beste_nummer] löschen&#34;" comment="" color="ffffff" rotated="0"></instruction>
+			</qRepeat>
+		</repeat>
+		<alternative text="&#34;Ziel_gefunden = TRUE&#34;" comment="" color="ffffff">
+			<qTrue>
+				<repeat text="&#34;aktueller_Knoten.kosten_hierher = 0&#34;" comment="" color="ffffff">
+					<qRepeat>
+						<instruction text="&#34;Schritte_Anzahl um 1 erhöhen&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+						<for text="&#34;For i:= -1 to 1 (1)                                                                                                                                                                                                                                                           &#34;" comment="&#34;&#34;" color="ffffff">
+							<qFor>
+								<for text="&#34;For j := -1 to 1 (1)&#34;" comment="&#34;&#34;" color="ffffff">
+									<qFor>
+										<for text="&#34;For u:= 1 to anzahl_abgearbeitet&#34;" comment="&#34;&#34;" color="ffffff">
+											<qFor>
+												<alternative text="&#34;(abgearbeitete_Liste[u].Pos_x = aktueller_Knoten.Pos_x + i) AND&#34;,&#34;(abgearbeitete_Liste[u].Pos_y = aktueller_Knoten.Pos_y + j)&#34;" comment="&#34;&#34;" color="ffffff">
+													<qTrue>
+														<alternative text="&#34;                                              Karte.read_kosten_feld(abgearbeitete_Liste[u].Pos_x,                                    &#34;,&#34;abgearbeitete_Liste[u].Pos_y) &#62; 0&#34;" comment="&#34;&#34;" color="ffffff">
+															<qTrue>
+																<alternative text="&#34;                                          abgearbeitete_Liste[u].kosten_hierher                                                      &#34;,&#34;&#60; neuer_Knoten.kosten_hierher &#34;" comment="&#34;&#34;" color="ffffff">
+																	<qTrue>
+																		<instruction text="&#34;neuer_Knoten := abgearbeitete_Liste[u];&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+																	</qTrue>
+																	<qFalse>
+																	</qFalse>
+																</alternative>
+															</qTrue>
+															<qFalse>
+															</qFalse>
+														</alternative>
+													</qTrue>
+													<qFalse>
+													</qFalse>
+												</alternative>
+											</qFor>
+										</for>
+									</qFor>
+								</for>
+							</qFor>
+						</for>
+						<instruction text="&#34;Größe von Schritt anpassen auf Schritte_anzahl+1&#34;,&#34;Schritt[Schritte_anzahl].x := aktueller_Knoten.Pos_x&#34;,&#34;Schritt[Schritte_anzahl].y := aktueller_Knoten.Pos_y&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+					</qRepeat>
+				</repeat>
+			</qTrue>
+			<qFalse>
+				<instruction text="&#34;Rückgabe von 1&#34;" comment="&#34;&#34;" color="ffffff" rotated="0"></instruction>
+			</qFalse>
+		</alternative>
+	</children>
+</root>
